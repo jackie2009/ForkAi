@@ -1,0 +1,81 @@
+<data>
+
+<item>
+<id>0</id>
+<label>空</label>
+<type>0</type>
+<help>无任何逻辑</help>
+</item>
+ 
+<item>
+<id>1</id>
+<label>吃饭</label>
+<type>1</type>
+<help>
+  参数1：每次增加HP的量
+  参数2：每次增加MP的量
+</help>
+</item>
+<item>
+<id>2</id>
+<label>睡觉</label>
+<type>1</type>
+<help>
+  参数1：每次增加HP的量
+  参数2：每次增加MP的量
+</help>
+
+</item>
+
+  <item>
+    <id>3</id>
+    <label>打豆豆</label>
+    <type>1</type>
+    <help>
+      参数1：每次增加HP的量
+      参数2：每次增加MP的量
+    </help>
+
+  </item>
+
+  <item>
+    <id>4</id>
+    <label>HP值判定</label>
+    <type>0</type>
+    <help>
+      参数1：&gt; &lt;  = 选一个
+      参数2：比较的值
+    </help>
+
+  </item>
+  <item>
+    <id>5</id>
+    <label>MP值判定</label>
+    <type>0</type>
+    <help>
+      参数1：&gt; &lt;  = 选一个
+      参数2：比较的值
+    </help>
+
+  </item>
+
+  <item>
+    <id>6</id>
+    <label>使用技能</label>
+    <type>1</type>
+    <help>
+      参数1：技能名称
+    </help>
+
+  </item>
+  <item>
+    <id>7</id>
+    <label>随机跳转</label>
+    <type>2</type>
+    <help>
+      参数1：概率1，概率2，..概率n,id1，id2，..idn
+    </help>
+
+  </item>
+  
+</data>
