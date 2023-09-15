@@ -25,6 +25,7 @@ public class NodeVo{
 	public Rect windowRect = new Rect(50, 50, 200, 70);
 	public string param="";
  
+ 
 	  
 	 
  
@@ -82,12 +83,28 @@ public	static Dictionary<int,NodeVo> dirModeMap;
 		for (int i = 0; i < list.Count; i++) {
 			aiLabels[i]=list[i].InnerText;
 		}
+ 
+		  list = xmlRoot.SelectNodes("item/trueTip");
+		aiTrueTips = new string[list.Count];
+		for (int i = 0; i < list.Count; i++)
+		{
+			aiTrueTips[i] = list[i].InnerText;
+		}
+		list = xmlRoot.SelectNodes("item/falseTip");
+		aiFalseTips = new string[list.Count];
+		for (int i = 0; i < list.Count; i++)
+		{
+			aiFalseTips[i] = list[i].InnerText;
+		}
+		
 		filePath = "";
 	
 	}
 	Vector2 rectAll;
 	  Vector2 scrollPosition=new Vector2(0,0);
 static	string [] aiLabels;
+static	string [] aiTrueTips;
+static	string [] aiFalseTips;
 	NodeVo currentDrawing=new NodeVo(false);
 	void OnGUI() {
 		EditorGUILayout.BeginHorizontal ();
@@ -259,41 +276,51 @@ static	string [] aiLabels;
 		GUILayout.BeginHorizontal();
 		GUILayout.Space (20);
 		vo.aiIndex=EditorGUILayout.Popup (vo.aiIndex,aiLabels) ;
-		if(GUILayout.Button ("+")){
-			NodeVo voNew=new NodeVo();
-			voNew.windowRect=vo.windowRect;
-			voNew.aiIndex=vo.aiIndex;
-			voNew.aiType=vo.aiType;
-			voNew.param=vo.param;
-			voNew.windowRect.position+=new Vector2(0,80);
-		}
-		if(GUILayout.Button ("!")){
-			EditorUtility.DisplayDialog(aiLabels[vo.aiIndex],	xmlRoot.SelectNodes("item/help")[vo.aiIndex].InnerText,"ok");
-		}
-		if(GUILayout.Button ("X")){
-			dirModeMap.Remove(id);
-			foreach (var item in dirModeMap.Values) {
-				if(item.targertID==id){
-					item.targertID=-1;
-					 
-				}
-				if(item.targertID2==id){
-					item.targertID2=-1;
-					
-				}
-			}
-		}
-		GUILayout.Space (20);
+		GUILayout.Space(20);
 		GUILayout.EndHorizontal();
+		
+	
+		 
 	
 		GUILayout.BeginHorizontal();
 		GUILayout.Space (20);
  
 		vo.param = EditorGUILayout.TextField (vo.param);
-		GUILayout.Space (20);
+		 
+		if (GUILayout.Button("+"))
+		{
+			NodeVo voNew = new NodeVo();
+			voNew.windowRect = vo.windowRect;
+			voNew.aiIndex = vo.aiIndex;
+			voNew.aiType = vo.aiType;
+			voNew.param = vo.param;
+			voNew.windowRect.position += new Vector2(0, 80);
+		}
+
+		if (GUILayout.Button("!"))
+		{
+			EditorUtility.DisplayDialog(aiLabels[vo.aiIndex], xmlRoot.SelectNodes("item/help")[vo.aiIndex].InnerText, "ok");
+		}
+		if (GUILayout.Button("X"))
+		{
+			dirModeMap.Remove(id);
+			foreach (var item in dirModeMap.Values)
+			{
+				if (item.targertID == id)
+				{
+					item.targertID = -1;
+
+				}
+				if (item.targertID2 == id)
+				{
+					item.targertID2 = -1;
+
+				}
+			}
+		}
 		GUILayout.EndHorizontal();
- 
-		 GUI.DragWindow();
+		GUILayout.Space(40);
+		GUI.DragWindow();
 		 
 	}
 	void saveFile ()
@@ -371,7 +398,25 @@ static	string [] aiLabels;
 		Vector3 startTan = startPos + getDir(dir,start).normalized*80;
 		Vector3 endTan = endPos + getDir(targetDir,end).normalized*80;
 		Handles.DrawBezier(startPos, endPos, startTan, endTan, mode==1?Color.green:Color.blue, null, 4);
-	GUI.color = mode == 1 ? Color.green : Color.blue;
+		
+		  var posList=Handles.MakeBezierPoints(startPos, endPos, startTan, endTan, 3);
+		
+		GUI.color = mode == 1 ? Color.green : Color.blue;
+		float texWid = 0;
+		float texHei = 18;
+		if (mode == 1 && !string.IsNullOrEmpty(aiTrueTips[self.aiIndex]))
+		{
+			 
+				 texWid = aiTrueTips[self.aiIndex].Length * 12 + 4;
+		 
+			GUI.Label(new Rect(posList[1].x- texWid/2, posList[1].y - texHei/2, texWid, texHei), aiTrueTips[self.aiIndex]);
+		}
+		if (mode == 2 && !string.IsNullOrEmpty(aiFalseTips[self.aiIndex]))
+		{
+			  texWid = aiFalseTips[self.aiIndex].Length * 12+4;
+			 
+			GUI.Label(new Rect(posList[1].x - texWid / 2, posList[1].y - texHei / 2, texWid, texHei), aiFalseTips[self.aiIndex]);
+		}
 		int rot = 0;
 		switch (targetDir) {
 		case LinkDirEnum.down:

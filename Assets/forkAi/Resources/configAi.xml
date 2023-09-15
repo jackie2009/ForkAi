@@ -4,6 +4,8 @@
 <id>0</id>
 <label>空</label>
 <type>0</type>
+<trueTip></trueTip>
+<falseTip></falseTip>
 <help>无任何逻辑</help>
 </item>
  
@@ -11,6 +13,8 @@
 <id>1</id>
 <label>吃饭</label>
 <type>1</type>
+  <trueTip></trueTip>
+<falseTip></falseTip>
 <help>
   参数1：每次增加HP的量
   参数2：每次增加MP的量
@@ -20,6 +24,8 @@
 <id>2</id>
 <label>睡觉</label>
 <type>1</type>
+  <trueTip></trueTip>
+<falseTip></falseTip>
 <help>
   参数1：每次增加HP的量
   参数2：每次增加MP的量
@@ -31,6 +37,8 @@
     <id>3</id>
     <label>打豆豆</label>
     <type>1</type>
+    <trueTip></trueTip>
+<falseTip></falseTip>
     <help>
       参数1：每次增加HP的量
       参数2：每次增加MP的量
@@ -42,6 +50,8 @@
     <id>4</id>
     <label>HP值判定</label>
     <type>0</type>
+    <trueTip>是</trueTip>
+<falseTip>否</falseTip>
     <help>
       参数1：&gt; &lt;  = 选一个
       参数2：比较的值
@@ -52,6 +62,8 @@
     <id>5</id>
     <label>MP值判定</label>
     <type>0</type>
+    <trueTip>是</trueTip>
+<falseTip>否</falseTip>
     <help>
       参数1：&gt; &lt;  = 选一个
       参数2：比较的值
@@ -63,6 +75,8 @@
     <id>6</id>
     <label>使用技能</label>
     <type>1</type>
+    <trueTip></trueTip>
+<falseTip></falseTip>
     <help>
       参数1：技能名称
     </help>
@@ -72,6 +86,8 @@
     <id>7</id>
     <label>随机跳转</label>
     <type>2</type>
+    <trueTip></trueTip>
+<falseTip></falseTip>
     <help>
       参数1：概率1，概率2，..概率n,id1，id2，..idn
     </help>
